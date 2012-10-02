@@ -75,7 +75,7 @@
           <ul style="display:none;">
             <% 
             project_content = ''
-            project_tree(User.current.projects.alphabetized.all) do |project, level|
+            project_tree(User.current.projects.sort {|a, b| a.name <=> b.name}.all) do |project, level|
               name_prefix = (level > 0 ? ('&nbsp;' * 2 * level + '&#187; ') : '')
               project_content << content_tag(:li,
                                      link_to(name_prefix + h(project), {:controller => 'projects', :action => 'show', :id => project, :jump => current_menu_item}))
